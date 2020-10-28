@@ -26,7 +26,33 @@ namespace YungChingProject.Controllers
         {
             db.tEmployees.Add(t);
             db.SaveChanges();
+            TempData["Attend_msg"] = "新增成功";
             return RedirectToAction("Home");
+        }
+        public ActionResult Edit(int? id)
+        {
+            tEmployee x = db.tEmployees.Where(p => p.fEmployeeId == id).FirstOrDefault();
+
+            return View(x);
+        }
+        [HttpPost]
+        public ActionResult Edit(tEmployee t)
+        {
+            tEmployee x = db.tEmployees.Where(f => f.fEmployeeId == t.fEmployeeId).FirstOrDefault();
+            if (x == null)
+            {
+                TempData["Attend_msg"] = "編輯失敗";
+                return RedirectToAction("Home");
+            }
+            else
+            {
+                x.fName = t.fName;
+                x.fIdent = t.fIdent;
+                x.fPassword = t.fPassword;
+                x.fDepartment = t.fDepartment;
+                TempData["Attend_msg"] = "編輯成功";
+                return RedirectToAction("Home");
+            }
         }
         public ActionResult Delete(int? id)
         {
@@ -39,7 +65,9 @@ namespace YungChingProject.Controllers
                     db.tEmployees.Remove(x);
                     db.SaveChanges();
                 }
+                TempData["Attend_msg"] = "刪除成功";
             }
+
             return RedirectToAction("Home");
         }
 
