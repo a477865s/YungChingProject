@@ -46,6 +46,8 @@
 
         @foreach (var item in Model)
         {
+            
+            string msg = "return confirm" + $"('確定要刪除{ item.fName }嗎?')";
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.fName)
@@ -61,7 +63,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("編輯", "Edit", new { id = item.fEmployeeId },new { @class = "btn btn-success" })
-                    @Html.ActionLink("刪除", "Delete", new { id = item.fEmployeeId }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("刪除", "Delete", new { id = item.fEmployeeId }, new { onclick = msg, @class = "btn btn-danger" })
                 </td>
             </tr>
         }
