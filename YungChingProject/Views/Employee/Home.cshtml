@@ -1,0 +1,70 @@
+﻿@model IEnumerable<YungChingProject.Models.tEmployee>
+
+@{
+    ViewBag.Title = "Home";
+}
+@functions{
+    public string maskPassword(string fPassword)
+    {
+        string s1 = fPassword.Substring(0, 3);
+        string sLast = fPassword.Substring(fPassword.Length - 1, 1);
+
+        string mask = "";
+        for (int i = 1; i <= fPassword.Length - 2; i++)
+        {
+            mask += "*";
+        }
+        return s1 + mask + sLast;
+    }
+    
+
+
+}
+<br />
+<hr />
+
+<p>
+    @Html.ActionLink("新增員工", "Create", "", new { @class = "btn btn-primary" })
+</p>
+
+    <table class="table" >
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fIdent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fDepartment)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fIdent)
+                </td>
+                <td>
+                    @maskPassword(item.fPassword)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fDepartment)
+                </td>
+                <td>
+                    @Html.ActionLink("編輯", "Edit", new { id = item.fEmployeeId },new { @class = "btn btn-success" })
+                    @Html.ActionLink("刪除", "Delete", new { id = item.fEmployeeId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+
+

@@ -11,13 +11,18 @@ namespace YungChingProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class tEmployee
     {
         public int fEmployeeId { get; set; }
+        [DisplayName("員工姓名")]
         public string fName { get; set; }
+        [DisplayName("身分證")]
         public string fIdent { get; set; }
+        [DisplayName("密碼")]
         public string fPassword { get; set; }
+        [DisplayName("部門")]
         public string fDepartment { get; set; }
     }
 }
